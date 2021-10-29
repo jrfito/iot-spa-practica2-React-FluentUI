@@ -1,24 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.scss';
+import React from "react";
+import "./App.scss";
+import { Field, Form, Formik } from "formik";
+import { PrimaryButton, TextField, Depths } from "@fluentui/react";
 
 function App() {
+  const myTextFiedName = ({ ...props }) => {
+    return <TextField label="Nombre:" {...props.field} {...props} />;
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Formik
+        initialValues={{
+          nombre: "",
+        }}
+        onSubmit={(values) => {
+          console.log(values);
+        }}
+      >
+        {(props) => (
+          <div style={{ boxShadow: Depths.depth8 }}>
+            <Form>
+              <Field name="nombre" component={myTextFiedName} />
+              <PrimaryButton text="Grabar" type="submit" />
+            </Form>
+          </div>
+        )}
+      </Formik>
     </div>
   );
 }
