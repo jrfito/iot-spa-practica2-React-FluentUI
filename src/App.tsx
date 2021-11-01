@@ -12,10 +12,11 @@ function App() {
   };
 
   useEffect(() => {
-    axios.get('https://localhost:44336/WeatherForecast')
+    axios.get('http://192.168.1.88:9000/api/Temperatura')
       .then((respuesta: AxiosResponse<weather[]>) => {
         console.log(respuesta.data);
       })
+      .catch(error => {console.log('Error en get');})
   }, [])
 
   return (
